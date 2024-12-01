@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aarjav's Advanced Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2d89ef;
+        }
+        #display {
+            width: 90%;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin: 5px;
+            padding: 15px 20px;
+            font-size: 16px;
+            background-color: #2d89ef;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #165ea3;
+        }
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Aarjav's Advanced Calculator</h1>
+    <p>Perform basic and advanced calculations seamlessly!</p>
+    <input type="text" id="display" placeholder="0" readonly>
+    <div class="row">
+        <button onclick="addToDisplay('7')">7</button>
+        <button onclick="addToDisplay('8')">8</button>
+        <button onclick="addToDisplay('9')">9</button>
+        <button onclick="addToDisplay('/')">÷</button>
+    </div>
+    <div class="row">
+        <button onclick="addToDisplay('4')">4</button>
+        <button onclick="addToDisplay('5')">5</button>
+        <button onclick="addToDisplay('6')">6</button>
+        <button onclick="addToDisplay('*')">×</button>
+    </div>
+    <div class="row">
+        <button onclick="addToDisplay('1')">1</button>
+        <button onclick="addToDisplay('2')">2</button>
+        <button onclick="addToDisplay('3')">3</button>
+        <button onclick="addToDisplay('-')">−</button>
+    </div>
+    <div class="row">
+        <button onclick="addToDisplay('0')">0</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="addToDisplay('+')">+</button>
+        <button onclick="clearDisplay()">C</button>
+    </div>
+    <div class="row">
+        <button onclick="advancedFunction('sqrt')">√</button>
+        <button onclick="advancedFunction('sin')">sin</button>
+        <button onclick="advancedFunction('cos')">cos</button>
+        <button onclick="advancedFunction('tan')">tan</button>
+    </div>
+    <div class="row">
+        <button onclick="resetCalculator()">Reset</button>
+    </div>
+
+    <script>
+        /**
+         * Appends a value to the display.
+         * @param {string} value - The value to append.
+         */
+        function addToDisplay(value) {
+            const display = document.getElementById("display");
+            display.value += value;
+        }
+
+        /**
+         * Evaluates the mathematical expression in the display.
+         * Includes error handling for invalid inputs.
+         */
+        function calculate() {
+            const display = document.getElementById("display");
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = "Error";
+            }
+        }
+
+        /**
+         * Clears the display content.
+         */
+        function clearDisplay() {
+            const display = document.getElementById("display");
+            display.value = "";
+        }
+
+        /**
+         * Resets the calculator by clearing the display and resetting any state.
+         */
+        function resetCalculator() {
+            const display = document.getElementById("display");
+            display.value = "";
+        }
+
+        /**
+         * Performs an advanced mathematical function.
+         * @param {string} func - The function to execute (sqrt, sin, cos, tan).
+         */
+        function advancedFunction(func) {
+            const display = document.getElementById("display");
+            const value = parseFloat(display.value);
+
+            if (isNaN(value)) {
+                display.value = "Error";
+                return;
+            }
+
+            switch (func) {
+                case "sqrt":
+                    display.value = Math.sqrt(value);
+                    break;
+                case "sin":
+                    display.value = Math.sin(value * Math.PI / 180).toFixed(2);
+                    break;
+                case "cos":
+                    display.value = Math.cos(value * Math.PI / 180).toFixed(2);
+                    break;
+                case "tan":
+                    display.value = Math.tan(value * Math.PI / 180).toFixed(2);
+                    break;
+                default:
+                    display.value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
